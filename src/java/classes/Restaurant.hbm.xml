@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-25 10:14:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Restaurant" table="restaurant" catalog="tp3oraclepasale" optimistic-lock="version">
+        <id name="idresto" type="java.lang.Integer">
+            <column name="Idresto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="typecuisine" class="classes.Typecuisine" fetch="select">
+            <column name="Typecuisine" not-null="true" />
+        </many-to-one>
+        <property name="nom" type="string">
+            <column name="Nom" length="50" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="Description" length="65535" not-null="true" />
+        </property>
+        <property name="siteweb" type="string">
+            <column name="Siteweb" length="50" not-null="true" />
+        </property>
+        <property name="idMembre" type="int">
+            <column name="idMembre" not-null="true" />
+        </property>
+        <property name="prixmoyen" type="long">
+            <column name="Prixmoyen" precision="10" scale="0" not-null="true" />
+        </property>
+        <property name="image" type="string">
+            <column name="Image" length="50" not-null="true" />
+        </property>
+        <set name="commentaires" table="commentaire" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Idresto" not-null="true" />
+            </key>
+            <one-to-many class="classes.Commentaire" />
+        </set>
+    </class>
+</hibernate-mapping>

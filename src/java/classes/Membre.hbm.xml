@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-11-25 10:14:53 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="classes.Membre" table="membre" catalog="tp3oraclepasale" optimistic-lock="version">
+        <id name="idmembre" type="java.lang.Integer">
+            <column name="Idmembre" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="typemembre" class="classes.Typemembre" fetch="select">
+            <column name="Typemembre" not-null="true" />
+        </many-to-one>
+        <property name="email" type="string">
+            <column name="Email" length="50" not-null="true" />
+        </property>
+        <property name="mpd" type="int">
+            <column name="Mpd" not-null="true" />
+        </property>
+        <property name="nomutil" type="string">
+            <column name="Nomutil" length="50" not-null="true" />
+        </property>
+        <property name="restoPref" type="int">
+            <column name="RestoPref" not-null="true" />
+        </property>
+        <property name="typecuisinePref" type="int">
+            <column name="TypecuisinePref" not-null="true" />
+        </property>
+        <set name="commentaires" table="commentaire" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Idmembre" not-null="true" />
+            </key>
+            <one-to-many class="classes.Commentaire" />
+        </set>
+    </class>
+</hibernate-mapping>
